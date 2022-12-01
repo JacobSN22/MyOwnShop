@@ -18,7 +18,7 @@ router.put('/song', (req, res) => {
     console.log('Opdater: Kalder /song med PUT')
 })
 
-router.delete('/song', (req, res) => {
+router.delete('/song/:id([0-9]*)', (req, res) => {
     console.log('Slet: Kalder /song med DELETE')
 })
 
