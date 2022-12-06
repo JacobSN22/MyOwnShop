@@ -1,11 +1,14 @@
 import express from "express"
 import { router as SongRouter } from './Routes/song-router.js'
 import dotenv from 'dotenv'
+import InitRouter from '../NodeJS/Routes/init-router.js'
+import UserRouter from '../NodeJS/Routes/user-router.js'
+
 dotenv.config();
 
 
 const app = express()
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 // App settings to provide access to request body data
 app.use(express.urlencoded({ extended: true }))
@@ -42,7 +45,9 @@ app.get('/Contact', (req, res) => {
     res.send('Contact us');
 })
 
-// app.use(SongRouter)
+app.use(SongRouter)
+app.use(InitRouter)
+app.use(UserRouter)
 
 app.listen(port, () => {
     console.log(`Webserver running on ${port}`);
