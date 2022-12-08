@@ -1,6 +1,6 @@
-import UserModel from '../Models/user-model.js'
+import OrgModel from '../Models/org-model.js'
 
-class UserController {
+class OrgController {
     list = async (req, res) => {
         let { sortkey, sortdir, limit, attributes } = req.query
         const order = [sortkey ? sortkey : 'id']
@@ -8,8 +8,8 @@ class UserController {
         limit = parseInt(limit) || 1000
         
 
-        const result = await UserModel.findAll( {
-            attributes:['id', 'firstname', 'lastname'],
+        const result = await OrgModel.findAll( {
+            attributes:['id', 'title', 'address'],
             order: [order],
             limit: limit
         })
@@ -18,8 +18,8 @@ class UserController {
 
     details = async (req, res) => {
         const { id } = req.params || 0
-        const result = await UserModel.findOne({
-            attributes: ['id', 'firstname', 'lastname', 'email', 'is_active', 'createdAt', 'updatedAt'],
+        const result = await OrgModel.findOne({
+            attributes: ['id', 'title', 'address', 'zipcode', 'city', 'country', 'createdAt', 'updatedAt'],
             where: { id: id }
         })
         res.json(result)
@@ -27,10 +27,10 @@ class UserController {
 
 
     create = async (req, res) => {
-        const { firstname, lastname, email, password } = req.body;
+        const { title, address, zipcode, city, country } = req.body;
 
-        if(firstname && lastname && email && password) {
-            const model = await UserModel.create(req.body)
+        if(title && address && zipcode && city) {
+            const model = await OrgModel.create(req.body)
             res.json({ newId: model.id })
         } else {
             res.sendStatus(418)
@@ -41,10 +41,10 @@ class UserController {
     update = async (req, res) => {
         const { id } = req.params || 0
 
-        const { firstname, lastname, email, password } = req.body;
+        const { title, address, zipcode, city, country } = req.body;
 
-        if(id && firstname && lastname && email && password) {
-            const model = await UserModel.update(req.body, {
+        if(title && address && zipcode && city) {
+            const model = await OrgModel.update(req.body, {
                 where: { id: id },
                 individualHooks: true
             })
@@ -55,4 +55,4 @@ class UserController {
     }
 }
 
-export default UserController
+export default OrgController

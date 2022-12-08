@@ -3,6 +3,7 @@ import { router as SongRouter } from './Routes/song-router.js'
 import dotenv from 'dotenv'
 import InitRouter from '../NodeJS/Routes/init-router.js'
 import UserRouter from '../NodeJS/Routes/user-router.js'
+import OrgRouter from '../NodeJS/Routes/org-router.js'
 
 dotenv.config();
 
@@ -48,6 +49,7 @@ app.get('/Contact', (req, res) => {
 app.use(SongRouter)
 app.use(InitRouter)
 app.use(UserRouter)
+app.use(OrgRouter)
 
 app.listen(port, () => {
     console.log(`Webserver running on ${port}`);
