@@ -5,4 +5,4 @@ http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(`hello world: ${value}`);
     res.end()
-}).listen(4000)
+}).listen(3000)

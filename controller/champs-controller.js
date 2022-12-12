@@ -1,6 +1,6 @@
-import OrgModel from '../Models/org-model.js'
+import ChampModel from '../Models/champs-model.js'
 
-class OrgController {
+class ChampController {
     list = async (req, res) => {
         let { sortkey, sortdir, limit, attributes } = req.query
         const order = [sortkey ? sortkey : 'id']
@@ -8,8 +8,8 @@ class OrgController {
         limit = parseInt(limit) || 1000
         
 
-        const result = await OrgModel.findAll( {
-            attributes:['id', 'title', 'address'],
+        const result = await ChampModel.findAll( {
+            attributes:['id', 'name', 'role'],
             order: [order],
             limit: limit
         })
@@ -18,8 +18,8 @@ class OrgController {
 
     details = async (req, res) => {
         const { id } = req.params || 0
-        const result = await OrgModel.findOne({
-            attributes: ['id', 'title', 'address', 'zipcode', 'city', 'country', 'createdAt', 'updatedAt'],
+        const result = await ChampModel.findOne({
+            attributes: ['id', 'name', 'role', 'difficulty', 'price', 'createdAt', 'updatedAt'],
             where: { id: id }
         })
         res.json(result)
@@ -27,10 +27,10 @@ class OrgController {
 
 
     create = async (req, res) => {
-        const { title, address, zipcode, city, country } = req.body;
+        const { name, role, difficulty, price } = req.body;
 
-        if(title && address && zipcode && city) {
-            const model = await OrgModel.create(req.body)
+        if(name && role && difficulty && price) {
+            const model = await ChampModel.create(req.body)
             res.json({ newId: model.id })
         } else {
             res.sendStatus(418)
@@ -41,10 +41,10 @@ class OrgController {
     update = async (req, res) => {
         const { id } = req.params || 0
 
-        const { title, address, zipcode, city, country } = req.body;
+        const { name, role, difficulty, price } = req.body;
 
-        if(title && address && zipcode && city) {
-            const model = await OrgModel.update(req.body, {
+        if(name && role && difficulty && price) {
+            const model = await ChampModel.update(req.body, {
                 where: { id: id },
                 individualHooks: true
             })
@@ -55,4 +55,4 @@ class OrgController {
     }
 }
 
-export default OrgController
+export default ChampController

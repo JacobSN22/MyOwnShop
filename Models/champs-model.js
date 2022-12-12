@@ -1,40 +1,40 @@
 import { sequelize } from '../Config/sequelize-config.js';
 import { DataTypes, Model } from 'sequelize';
 
-class OrgModel extends Model{}
+class ChampModel extends Model{}
 
-OrgModel.init({
+ChampModel.init({
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey:true
     },
-    title: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    address: {
+    role: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    zipcode: {
+    difficulty: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    price: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    city: {
+    image: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    country: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
 }, {
     sequelize,
-    modelName: 'org',
+    modelName: 'champs',
     freezeTableName: true,
     underscored: true,
 })
 
-export default OrgModel
+export default ChampModel
