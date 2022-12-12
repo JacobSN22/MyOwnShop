@@ -14,14 +14,6 @@ const port = process.env.PORT || 3000;
 // App settings to provide access to request body data
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => {
-    res.send('Frontpage')
-})
-
-app.get('/about', (req, res) => {
-    res.send('About us')
-})
-
 app.use(InitRouter)
 app.use(AuthRouter)
 app.use(ChampRouter)
