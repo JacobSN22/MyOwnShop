@@ -6,6 +6,8 @@ import ChampRouter from '../Opgave-MyOwnChoice-Shop/Routes/champs-router.js'
 import LevelRouter from '../Opgave-MyOwnChoice-Shop/Routes/levels-router.js'
 import RoleRouter from '../Opgave-MyOwnChoice-Shop/Routes/roles-router.js'
 import ReviewRouter from '../Opgave-MyOwnChoice-Shop/Routes/reviews-router.js'
+import DescriptionRouter from '../Opgave-MyOwnChoice-Shop/Routes/description-router.js'
+import UserRouter from '../Opgave-MyOwnChoice-Shop/Routes/user-router.js'
 
 
 dotenv.config();
@@ -27,6 +29,8 @@ app.use(ChampRouter)
 app.use(LevelRouter)
 app.use(RoleRouter)
 app.use(ReviewRouter)
+app.use(DescriptionRouter)
+app.use(UserRouter)
 
 app.listen(port, () => {
     console.log(`Webserver running on ${port}`);
