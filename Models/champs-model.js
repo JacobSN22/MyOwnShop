@@ -14,16 +14,16 @@ ChampModel.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    role: {
-        type: DataTypes.STRING,
+    role_id: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
-    difficulty: {
-        type: DataTypes.STRING,
+    level_id: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE(16,2),
         allowNull: false
     },
     image: {

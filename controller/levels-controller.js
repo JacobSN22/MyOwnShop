@@ -1,6 +1,6 @@
-import ChampModel from '../Models/champs-model.js'
+import LevelModel from '../Models/levels-model.js'
 
-class ChampController {
+class LevelController {
     list = async (req, res) => {
         let { sortkey, sortdir, limit, attributes } = req.query
         const order = [sortkey ? sortkey : 'id']
@@ -8,8 +8,8 @@ class ChampController {
         limit = parseInt(limit) || 10000
         
 
-        const result = await ChampModel.findAll( {
-            attributes:['id', 'name', 'role'],
+        const result = await LevelModel.findAll( {
+            attributes:['id', 'level'],
             order: [order],
             limit: limit
         })
@@ -18,8 +18,8 @@ class ChampController {
 
     details = async (req, res) => {
         const { id } = req.params || 0
-        const result = await ChampModel.findOne({
-            attributes: ['id', 'name', 'role_id', 'level_id', 'price', 'createdAt', 'updatedAt'],
+        const result = await LevelModel.findOne({
+            attributes: ['id', 'level', 'createdAt', 'updatedAt'],
             where: { id: id }
         })
         res.json(result)
@@ -27,10 +27,10 @@ class ChampController {
 
 
     create = async (req, res) => {
-        const { name, role_id, level_id, price } = req.body;
+        const { level } = req.body;
 
-        if(name && role_id && level_id && price) {
-            const model = await ChampModel.create(req.body)
+        if(level) {
+            const model = await LevelModel.create(req.body)
             res.json({ newId: model.id })
         } else {
             res.sendStatus(418)
@@ -41,10 +41,10 @@ class ChampController {
     update = async (req, res) => {
         const { id } = req.params || 0
 
-        const { name, role_id, level_id, price } = req.body;
+        const { level } = req.body;
 
-        if(name && role_id && level_id && price) {
-            const model = await ChampModel.update(req.body, {
+        if(level) {
+            const model = await LevelModel.update(req.body, {
                 where: { id: id },
                 individualHooks: true
             })
@@ -55,4 +55,4 @@ class ChampController {
     }
 }
 
-export default ChampController
+export default LevelController
