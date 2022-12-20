@@ -3,13 +3,18 @@ import ChampModel from '../Models/champs-model.js'
 class ChampController {
     list = async (req, res) => {
         let { sortkey, sortdir, limit, attributes } = req.query
-        const order = [sortkey ? sortkey : 'id']
-        order.push(sortdir || 'ASC')
+        const order = [sortkey ? sortkey : 'name']
         limit = parseInt(limit) || 10000
+        const high = script.getElementById('High')
+        if(high) {
+            order.push(sortdir || 'DESC')
+        } else {
+            order.push(sortdir || 'ASC')
+        }
         
 
         const result = await ChampModel.findAll( {
-            attributes:['id', 'name', 'role_id'],
+            attributes:['id', 'name', 'role_id', 'level_id', 'price'],
             order: [order],
             limit: limit
         })
