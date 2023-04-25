@@ -5,12 +5,7 @@ class ChampController {
         let { sortkey, sortdir, limit, attributes } = req.query
         const order = [sortkey ? sortkey : 'name']
         limit = parseInt(limit) || 10000
-        const high = script.getElementById('High')
-        if(high) {
-            order.push(sortdir || 'DESC')
-        } else {
-            order.push(sortdir || 'ASC')
-        }
+        order.push(sortdir || 'ASC')
         
 
         const result = await ChampModel.findAll( {
